@@ -1,0 +1,60 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Unity-specific files
+[*.{cs,js,boo,shader,compute,cginc,hlsl}]
+indent_style = tab
+indent_size = 8
+tab_width = 8
+
+# C# files
+[*.cs]
+indent_style = tab
+indent_size = 8
+tab_width = 8
+
+# Unity scene and prefab files
+[*.{unity,prefab,mat,asset}]
+indent_style = space
+indent_size = 2
+
+# Unity meta files
+[*.meta]
+indent_style = space
+indent_size = 2
+
+# JSON files (Unity package manifests, etc.)
+[*.json]
+indent_style = space
+indent_size = 2
+
+# YAML files (Unity CI/CD configs)
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# XML files (Unity project settings)
+[*.xml]
+indent_style = space
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+# Batch files (Windows)
+[*.bat]
+end_of_line = crlf
+
+# Shell scripts (macOS/Linux)
+[*.sh]
+end_of_line = lf
