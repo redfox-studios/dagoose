@@ -8,27 +8,26 @@ public class Sheep : MonoBehaviour
 	Rigidbody2D rb;
 	[SerializeField]
 	private Vector2 direction;
+	[SerializeField]
+	float speed;
+
+	Vector2 returnRandomVector()
+	{
+		float randomX = Random.Range(-1f, 1f);
+		float randomY = Random.Range(-1f, 1f);
+
+		direction.x = randomX;
+		direction.y = randomY;
+
+		Vector2 normalizedDirection = direction.normalized;
+
+		return normalizedDirection;
+	}
 
 	void Start()
 	{
-		float RandomX = Random.Range(-1f, 1f);
-		float RandomY = Random.Range(-1f, 1f);
+		Vector2 normalizedDirection = returnRandomVector();
 
-		direction = new Vector2(RandomX, RandomY);
-		rb.linearVelocity = direction;
-
-		StartCoroutine(MyCorot());
-	}
-
-	void Update()
-	{
-		
-	}
-
-	IEnumerator MyCorot()
-	{
-		Debug.Log("hi");
-		yield return new WaitForSeconds(2f);
-		Debug.Log("bye");
+		rb.linearVelocity = normalizedDirection * speed;
 	}
 }
