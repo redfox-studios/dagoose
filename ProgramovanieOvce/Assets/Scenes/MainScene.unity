@@ -1311,8 +1311,8 @@ MonoBehaviour:
   speed: 2
   waitTimeMin: 1
   waitTimeMax: 1.5
-  restTimeMin: 0
-  restTimeMax: 0
+  restTimeMin: 0.5
+  restTimeMax: 1
 --- !u!50 &1825346221
 Rigidbody2D:
   serializedVersion: 5

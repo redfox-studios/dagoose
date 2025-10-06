@@ -23,11 +23,31 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	float restTimeMax;
 
+	float returnRandomWaitTime()
+	{
+		float randomWaitTime = Random.Range(waitTimeMin, waitTimeMax);
+		randomWaitTime = Mathf.Round(randomWaitTime * 100) / 100; // round to 2 decimal numbers
+
+		return randomWaitTime;
+	}
+
+	float returnRandomRestTime()
+	{
+		float randomRestTime = Random.Range(restTimeMin, restTimeMax);
+		randomRestTime = Mathf.Round(randomRestTime * 100) / 100; // round to 2 decimal numbers
+
+		return randomRestTime;
+	}
+
+	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	Vector2 returnRandomVector()
 	{
 		float randomX = Random.Range(-1f, 1f);
+		randomX = Mathf.Round(randomX * 100) / 100; // round to 2 decimal numbers
+
 		float randomY = Random.Range(-1f, 1f);
+		randomY = Mathf.Round(randomY * 100) / 100; // round to 2 decimal numbers
 
 		direction.x = randomX;
 		direction.y = randomY;
@@ -37,21 +57,7 @@ public class Sheep : MonoBehaviour
 		return normalizedDirection;
 	}
 
-	float returnRandomWaitTime()
-	{
-		float randomWaitTime = Random.Range(waitTimeMin, waitTimeMax);
-		randomWaitTime = Mathf.Round(randomWaitTime * 100) / 100; // keep only 2 decimal numbers for randomWaitTime
-
-		return randomWaitTime;
-	}
-
-	float returnRandomRestTime()
-	{
-		float randomRestTime = Random.Range(restTimeMin, restTimeMax);
-		randomRestTime = Mathf.Round(randomRestTime * 100) / 100; // keep only 2 decimal numbers for randomWaitTime
-
-		return randomRestTime;
-	}
+	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	// preco pouzivame coroutines?
 	// Je to preto lebo wait time nemozeme pouzivat v normalnych funkciach
@@ -62,12 +68,22 @@ public class Sheep : MonoBehaviour
 
 			// variables
 			float randomWaitTime = returnRandomWaitTime();
+			float randomRestTime = returnRandomRestTime();
 			Vector2 normalizedDirection = returnRandomVector();
 
-			Debug.Log("Before wait. Waiting: " + randomWaitTime + " seconds.");
+			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+			
+			// wait
+			Debug.Log("Waiting for " + randomWaitTime + " seconds.");
 			yield return new WaitForSeconds(randomWaitTime);
 
 			rb.linearVelocity = normalizedDirection * speed;
+
+			// rest
+			Debug.Log("Resting for " + randomRestTime + " seconds.");
+			yield return new WaitForSeconds(randomWaitTime);
+
+			rb.linearVelocity = new Vector2(0, 0);
 		}
 	}
 
