@@ -23,6 +23,12 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	float restTimeMax;
 
+	/*
+	Notes:
+	- rest time is the time before looping again
+	- wait time is the time before moving the sheep after starting the coroutine (MainCorot)
+	 */
+
 	float returnRandomWaitTime()
 	{
 		float randomWaitTime = Random.Range(waitTimeMin, waitTimeMax);
@@ -60,8 +66,9 @@ public class Sheep : MonoBehaviour
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	// preco pouzivame coroutines?
-	// Je to preto lebo wait time nemozeme pouzivat v normalnych funkciach
+	// Je to preto lebo wait time (WaitForSeconds) nemozeme pouzivat v normalnych funkciach
 	// to by potom cely engine "afkoval"
+
 	IEnumerator MainCorot()
 	{
 		while (true) {
