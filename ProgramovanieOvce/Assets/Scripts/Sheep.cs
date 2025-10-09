@@ -11,7 +11,7 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	private Vector2 direction;
 	[SerializeField]
-	float speed = 0.5;
+	float speed = 0.5f;
 
 	[Header("Delay Parameters")]
 	[SerializeField]
