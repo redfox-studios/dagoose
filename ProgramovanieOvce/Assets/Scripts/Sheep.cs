@@ -13,12 +13,19 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	float speed = 0.5f;
 
-	[Header("Delay Parameters")]
+	[Header("Wait time Parameters")]
 	[SerializeField] // wait time is the time before moving the sheep after starting the coroutine (MainCorot)
 	float waitTimeMin = 1;
 	[SerializeField]
 	float waitTimeMax = 2;
 
+	[Header("Rest time Parameters")]
+	[SerializeField] // rest time, okay, maybe it was actually useful for something
+	float restTimeMin = 1;
+	[SerializeField]
+	float restTimeMax = 2;
+
+	[Header("Eating Parameters")]
 	[SerializeField] // eat time
 	float eatTimeMin = 2;
 	[SerializeField]
@@ -32,6 +39,14 @@ public class Sheep : MonoBehaviour
 		randomWaitTime = Mathf.Round(randomWaitTime * 100) / 100; // round to 2 decimal numbers
 
 		return randomWaitTime;
+	}
+
+	float returnRandomRestTime()
+	{
+		float randomRestTime = Random.Range(restTimeMin, restTimeMax);
+		randomRestTime = Mathf.Round(randomRestTime * 100) / 100; // round to 2 decimal numbers
+
+		return randomRestTime;
 	}
 
 	float returnRandomEatTime()
@@ -90,6 +105,7 @@ public class Sheep : MonoBehaviour
 
 			// variables
 			float randomWaitTime = returnRandomWaitTime();
+			float randomRestTime = returnRandomRestTime();
 			Vector2 normalizedDirection = returnRandomVector();
 
 			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -101,13 +117,15 @@ public class Sheep : MonoBehaviour
 			// move
 			rb.linearVelocity = normalizedDirection * speed;
 
-			// wait 2
-			Debug.Log("Waiting again for " + randomWaitTime + " seconds.");
-			yield return new WaitForSeconds(randomWaitTime);
+			// rest
+			Debug.Log("Resting for " + randomRestTime + " seconds.");
+			yield return new WaitForSeconds(randomRestTime);
 
 			StartCoroutine(EatingCorot());
 		}
 	}
+
+	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	void Start()
 	{
