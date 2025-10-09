@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Numerics;
+using System.Globalization;
 
 public class Sheep : MonoBehaviour
 {
@@ -30,8 +32,8 @@ public class Sheep : MonoBehaviour
 	float eatTimeMin = 2;
 	[SerializeField]
 	float eatTimeMax = 3;
-	[SerializeField]
-	int chanceToEat = 30; // (x / 100)
+	// [SerializeField]
+	// int chanceToEat = 30; // (x / 100)
 
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
@@ -77,6 +79,11 @@ public class Sheep : MonoBehaviour
 		return normalizedDirection;
 	}
 
+	Vector2 startWalking()
+        {
+                return rb.linearVelocity = normalizedDirection * speed;
+        }
+
 	Vector2 stopWalking()
 	{
 		return rb.linearVelocity = new Vector2(0, 0);
@@ -117,13 +124,15 @@ public class Sheep : MonoBehaviour
 			yield return new WaitForSeconds(randomWaitTime);
 
 			// move
-			rb.linearVelocity = normalizedDirection * speed;
+			startWalking();
 
 			// rest
 			Debug.Log("Resting for " + randomRestTime + " seconds.");
 			yield return new WaitForSeconds(randomRestTime);
 
-			StartCoroutine(EatingCorot());
+			stopWalking();
+
+			yield return EatingCorot();
 		}
 	}
 
