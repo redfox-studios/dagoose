@@ -7,28 +7,24 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	Rigidbody2D rb;
 
-	[Header("Moevement parameters")]
+	[Header("Movement parameters")]
 	[SerializeField]
 	private Vector2 direction;
 	[SerializeField]
 	float speed = 0.5f;
 
 	[Header("Delay Parameters")]
-	[SerializeField]
+	[SerializeField] // wait time is the time before moving the sheep after starting the coroutine (MainCorot)
 	float waitTimeMin = 1;
 	[SerializeField]
 	float waitTimeMax = 2;
 
-	[SerializeField]
+	[SerializeField] // rest time is the time before looping again
 	float restTimeMin = 1;
 	[SerializeField]
 	float restTimeMax = 2;
 
-	/*
-	Notes:
-	- rest time is the time before looping again
-	- wait time is the time before moving the sheep after starting the coroutine (MainCorot)
-	 */
+	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	float returnRandomWaitTime()
 	{
@@ -64,11 +60,23 @@ public class Sheep : MonoBehaviour
 		return normalizedDirection;
 	}
 
+	Vector2 stopWalking()
+	{
+		return rb.linearVelocity = new Vector2(0, 0);
+	}
+
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	// preco pouzivame coroutines?
 	// Je to preto lebo wait time (WaitForSeconds) nemozeme pouzivat v normalnych funkciach
 	// to by potom cely engine "afkoval"
+
+	IEnumerator EatingCorot()
+	{
+		Debug.Log("papam travu");
+		yield return new WaitForSeconds(1f);
+		Debug.Log("dojedla som");
+	}
 
 	IEnumerator MainCorot()
 	{
@@ -85,13 +93,15 @@ public class Sheep : MonoBehaviour
 			Debug.Log("Waiting for " + randomWaitTime + " seconds.");
 			yield return new WaitForSeconds(randomWaitTime);
 
+			// move
 			rb.linearVelocity = normalizedDirection * speed;
 
 			// rest
 			Debug.Log("Resting for " + randomRestTime + " seconds.");
 			yield return new WaitForSeconds(randomWaitTime);
 
-			rb.linearVelocity = new Vector2(0, 0);
+			stopWalking();
+			StartCoroutine(EatingCorot());
 		}
 	}
 
