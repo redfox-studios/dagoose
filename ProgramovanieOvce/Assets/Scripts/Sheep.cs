@@ -80,7 +80,8 @@ public class Sheep : MonoBehaviour
 	}
 
 	Vector2 startWalking()
-        {
+	{
+		Vector2 normalizedDirection = returnRandomVector();
                 return rb.linearVelocity = normalizedDirection * speed;
         }
 
@@ -115,7 +116,6 @@ public class Sheep : MonoBehaviour
 			// variables
 			float randomWaitTime = returnRandomWaitTime();
 			float randomRestTime = returnRandomRestTime();
-			Vector2 normalizedDirection = returnRandomVector();
 
 			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
