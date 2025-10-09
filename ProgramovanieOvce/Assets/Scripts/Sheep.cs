@@ -19,10 +19,10 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	float waitTimeMax = 2;
 
-	[SerializeField] // rest time is the time before looping again
-	float restTimeMin = 1;
+	[SerializeField] // eat time
+	float eatTimeMin = 2;
 	[SerializeField]
-	float restTimeMax = 2;
+	float eatTimeMax = 3;
 
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
@@ -34,12 +34,12 @@ public class Sheep : MonoBehaviour
 		return randomWaitTime;
 	}
 
-	float returnRandomRestTime()
+	float returnRandomEatTime()
 	{
-		float randomRestTime = Random.Range(restTimeMin, restTimeMax);
-		randomRestTime = Mathf.Round(randomRestTime * 100) / 100; // round to 2 decimal numbers
+		float randomEatTime = Random.Range(eatTimeMin, eatTimeMax);
+		randomEatTime = Mathf.Round(randomEatTime * 100) / 100; // round to 2 decimal numbers
 
-		return randomRestTime;
+		return randomEatTime;
 	}
 
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -73,9 +73,15 @@ public class Sheep : MonoBehaviour
 
 	IEnumerator EatingCorot()
 	{
-		Debug.Log("papam travu");
-		yield return new WaitForSeconds(1f);
-		Debug.Log("dojedla som");
+		float randomEatTime = returnRandomEatTime();
+
+		stopWalking();
+		Debug.Log("Eating for " + randomEatTime + " seconds.");
+		yield return new WaitForSeconds(randomEatTime);
+		Debug.Log("finished eating");
+
+		yield break;	// finally found out how to do it
+				// idk why, but my intellisense doesnt work. Unity sucks imo
 	}
 
 	IEnumerator MainCorot()
@@ -84,7 +90,6 @@ public class Sheep : MonoBehaviour
 
 			// variables
 			float randomWaitTime = returnRandomWaitTime();
-			float randomRestTime = returnRandomRestTime();
 			Vector2 normalizedDirection = returnRandomVector();
 
 			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -96,11 +101,10 @@ public class Sheep : MonoBehaviour
 			// move
 			rb.linearVelocity = normalizedDirection * speed;
 
-			// rest
-			Debug.Log("Resting for " + randomRestTime + " seconds.");
+			// wait 2
+			Debug.Log("Waiting again for " + randomWaitTime + " seconds.");
 			yield return new WaitForSeconds(randomWaitTime);
 
-			stopWalking();
 			StartCoroutine(EatingCorot());
 		}
 	}
