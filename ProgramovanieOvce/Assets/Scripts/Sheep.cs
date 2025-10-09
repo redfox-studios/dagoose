@@ -30,6 +30,8 @@ public class Sheep : MonoBehaviour
 	float eatTimeMin = 2;
 	[SerializeField]
 	float eatTimeMax = 3;
+	[SerializeField]
+	int chanceToEat = 30; // (x / 100)
 
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
