@@ -111,7 +111,7 @@ public class Sheep : MonoBehaviour
 			Vector2 normalizedDirection = returnRandomVector();
 
 			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-			
+
 			// wait
 			Debug.Log("Waiting for " + randomWaitTime + " seconds.");
 			yield return new WaitForSeconds(randomWaitTime);
@@ -131,8 +131,6 @@ public class Sheep : MonoBehaviour
 
 	void Start()
 	{
-
 		StartCoroutine(MainCorot());
-
 	}
 }
