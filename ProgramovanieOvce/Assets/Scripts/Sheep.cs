@@ -11,17 +11,18 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	private Vector2 direction;
 	[SerializeField]
-	float speed;
+	float speed = 0.5;
 
 	[Header("Delay Parameters")]
 	[SerializeField]
-	float waitTimeMin;
+	float waitTimeMin = 1;
 	[SerializeField]
-	float waitTimeMax;
+	float waitTimeMax = 2;
+
 	[SerializeField]
-	float restTimeMin;
+	float restTimeMin = 1;
 	[SerializeField]
-	float restTimeMax;
+	float restTimeMax = 2;
 
 	/*
 	Notes:
