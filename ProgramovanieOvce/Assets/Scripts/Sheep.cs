@@ -21,19 +21,20 @@ public class Sheep : MonoBehaviour
 	[SerializeField]
 	float waitTimeMax = 2;
 
-	[Header("Rest time Parameters")]
-	[SerializeField] // rest time, okay, maybe it was actually useful for something
-	float restTimeMin = 1;
+	[Header("Move time Parameters")]
+	[SerializeField] // move time, okay, maybe it was actually useful for something (originally restTime)
+	float moveTimeMin = 1;
 	[SerializeField]
-	float restTimeMax = 2;
+	float moveTimeMax = 2;
 
 	[Header("Eating Parameters")]
 	[SerializeField] // eat time
 	float eatTimeMin = 2;
 	[SerializeField]
 	float eatTimeMax = 3;
+
 	// [SerializeField]
-	// int chanceToEat = 30; // (x / 100)
+	// int chanceToEat = 30; // (x / 100) - not needed since im doing it another way
 
 	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
@@ -45,12 +46,12 @@ public class Sheep : MonoBehaviour
 		return randomWaitTime;
 	}
 
-	float returnRandomRestTime()
+	float returnRandomMoveTime()
 	{
-		float randomRestTime = Random.Range(restTimeMin, restTimeMax);
-		randomRestTime = Mathf.Round(randomRestTime * 100) / 100; // round to 2 decimal numbers
+		float randomMoveTime = Random.Range(moveTimeMin, moveTimeMax);
+		randomMoveTime = Mathf.Round(randomMoveTime * 100) / 100; // round to 2 decimal numbers
 
-		return randomRestTime;
+		return randomMoveTime;
 	}
 
 	float returnRandomEatTime()
@@ -111,11 +112,11 @@ public class Sheep : MonoBehaviour
 
 	IEnumerator MainCorot()
 	{
-		while (true) {
-
+		while (true)
+		{
 			// variables
 			float randomWaitTime = returnRandomWaitTime();
-			float randomRestTime = returnRandomRestTime();
+			float randomMoveTime = returnRandomMoveTime();
 
 			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
@@ -125,13 +126,13 @@ public class Sheep : MonoBehaviour
 
 			// move
 			startWalking();
+			Debug.Log("Moving for " + randomMoveTime + " seconds.");
+			yield return new WaitForSeconds(randomMoveTime);
 
-			// rest
-			Debug.Log("Resting for " + randomRestTime + " seconds.");
-			yield return new WaitForSeconds(randomRestTime);
-
+			// stop walking
 			stopWalking();
 
+			// eat
 			yield return EatingCorot();
 		}
 	}
