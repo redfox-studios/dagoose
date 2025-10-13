@@ -3,7 +3,7 @@ using System.Collections;
 // using System.Numerics; - FUCK YOU, WHY DID YOU EVEN PUT YOURSELF AUTOMATICALLY HERE
 using System.Globalization;
 
-public class Sheep : MonoBehaviour
+public class Goose : MonoBehaviour
 {
 	[Header("Main")]
 	[SerializeField]
@@ -16,7 +16,7 @@ public class Sheep : MonoBehaviour
 	float speed = 0.5f;
 
 	[Header("Wait time Parameters")]
-	[SerializeField] // wait time is the time before moving the sheep after starting the coroutine (MainCorot)
+	[SerializeField] // wait time is the time before moving the goose after starting the coroutine (MainCorot)
 	float waitTimeMin = 1;
 	[SerializeField]
 	float waitTimeMax = 2;
