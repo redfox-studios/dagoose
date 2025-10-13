@@ -6,37 +6,25 @@ using System.Globalization;
 public class Goose : MonoBehaviour
 {
 	[Header("Main")]
-	[SerializeField]
-	Rigidbody2D rb;
+	[SerializeField] Rigidbody2D rb;
 
 	[Header("Movement parameters")]
-	[SerializeField]
-	private Vector2 direction;
-	[SerializeField]
-	float speed = 0.5f;
+	[SerializeField] private Vector2 direction;
+	[SerializeField] float speed = 0.5f;
 
-	[Header("Wait time Parameters")]
-	[SerializeField] // wait time is the time before moving the goose after starting the coroutine (MainCorot)
-	float waitTimeMin = 1;
-	[SerializeField]
-	float waitTimeMax = 2;
+	[Header("Wait time Parameters")] // wait time is the time before moving the goose after starting the coroutine (MainCorot)
+	[SerializeField] float waitTimeMin = 1;
+	[SerializeField] float waitTimeMax = 2;
 
-	[Header("Move time Parameters")]
-	[SerializeField] // move time, okay, maybe it was actually useful for something (originally restTime)
-	float moveTimeMin = 1;
-	[SerializeField]
-	float moveTimeMax = 2;
+	[Header("Move time Parameters")] // move time, okay, maybe it was actually useful for something (originally restTime)
+	[SerializeField] float moveTimeMin = 1;
+	[SerializeField] float moveTimeMax = 2;
 
-	[Header("Eating Parameters")]
-	[SerializeField] // eat time
-	float eatTimeMin = 2;
-	[SerializeField]
-	float eatTimeMax = 3;
+	[Header("Eating Parameters")]// eat time
+	[SerializeField] float eatTimeMin = 2;
+	[SerializeField] float eatTimeMax = 3;
 
-	// [SerializeField]
-	// int chanceToEat = 30; // (x / 100) - not needed since im doing it another way
-
-	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+	// [SerializeField] int chanceToEat = 30; // (x / 100) - not needed since im doing it another way
 
 	float returnRandomWaitTime()
 	{
@@ -61,8 +49,6 @@ public class Goose : MonoBehaviour
 
 		return randomEatTime;
 	}
-
-	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	Vector2 returnRandomVector()
 	{
@@ -91,8 +77,6 @@ public class Goose : MonoBehaviour
 		return rb.linearVelocity = new Vector2(0, 0);
 	}
 
-	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
 	// preco pouzivame coroutines?
 	// Je to preto lebo wait time (WaitForSeconds) nemozeme pouzivat v normalnych funkciach
 	// to by potom cely engine "afkoval"
@@ -118,8 +102,6 @@ public class Goose : MonoBehaviour
 			float randomWaitTime = returnRandomWaitTime();
 			float randomMoveTime = returnRandomMoveTime();
 
-			// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
 			// wait
 			Debug.Log("Waiting for " + randomWaitTime + " seconds.");
 			yield return new WaitForSeconds(randomWaitTime);
@@ -136,8 +118,6 @@ public class Goose : MonoBehaviour
 			yield return EatingCorot();
 		}
 	}
-
-	// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	void Start()
 	{
