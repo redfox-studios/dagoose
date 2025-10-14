@@ -7,8 +7,13 @@ public class Goose : MonoBehaviour
 {
 	[Header("Main")]
 	[SerializeField] Rigidbody2D rb;
+	[SerializeField] int gooseType = 1;	// ZATIAL NA TOM NEBUDEM PRACOVAT,
+						// ALE TYPES SU:
+						// 0 = secret (rainbow :O)
+						// 1 = normal
+						// 2 = evil
 
-	[Header("Movement parameters")]
+	[Header("Movement parameters")] // movement (obviously)
 	[SerializeField] private Vector2 direction;
 	[SerializeField] float speed = 0.5f;
 
@@ -20,11 +25,9 @@ public class Goose : MonoBehaviour
 	[SerializeField] float moveTimeMin = 1;
 	[SerializeField] float moveTimeMax = 2;
 
-	[Header("Eating Parameters")]// eat time
+	[Header("Eating Parameters")] // eat time
 	[SerializeField] float eatTimeMin = 2;
 	[SerializeField] float eatTimeMax = 3;
-
-	// [SerializeField] int chanceToEat = 30; // (x / 100) - not needed since im doing it another way
 
 	float returnRandomWaitTime()
 	{
@@ -77,10 +80,6 @@ public class Goose : MonoBehaviour
 		return rb.linearVelocity = new Vector2(0, 0);
 	}
 
-	// preco pouzivame coroutines?
-	// Je to preto lebo wait time (WaitForSeconds) nemozeme pouzivat v normalnych funkciach
-	// to by potom cely engine "afkoval"
-
 	IEnumerator EatingCorot()
 	{
 		float randomEatTime = returnRandomEatTime();
@@ -122,5 +121,24 @@ public class Goose : MonoBehaviour
 	void Start()
 	{
 		StartCoroutine(MainCorot());
+
+		switch (gooseType)
+		{
+			case 1:
+				Debug.Log("This is a normal goose.");
+				break;
+			case 2:
+				Debug.Log("This is an evil goose.");
+				break;
+			default:
+				Debug.Log("Error: Invalid goose type.");
+				break;
+		}
 	}
 }
+
+// -*- Notes -*-
+
+// preco pouzivame coroutines?
+// Je to preto lebo wait time (WaitForSeconds) nemozeme pouzivat v normalnych funkciach
+// to by potom cely engine "afkoval"
