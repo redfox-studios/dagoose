@@ -4353,6 +4353,7 @@ GameObject:
   - component: {fileID: 1315063978}
   - component: {fileID: 1315063979}
   - component: {fileID: 1315063980}
+  - component: {fileID: 1315063981}
   m_Layer: 0
   m_Name: Goose
   m_TagString: Untagged
@@ -4524,6 +4525,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.625, y: 0.78125}
   m_EdgeRadius: 0
+--- !u!114 &1315063981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315063975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b5436c70a4f104d99ca8afb6ec50ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  useFlipX: 1
+  invertFlip: 0
+  flipThreshold: 0.01
+  rb: {fileID: 1315063979}
 --- !u!1 &1434333136
 GameObject:
   m_ObjectHideFlags: 0
