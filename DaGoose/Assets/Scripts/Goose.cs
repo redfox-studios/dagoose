@@ -150,6 +150,11 @@ Poznamky:
 	- to by potom cely engine "afkoval"
 
 - Je tu extremne velky bordel a bolo by dobre to tu upratat
+
+- future plany do hry:
+	- z predanych vajec ziskavas peniaze (vajce predas tak ze na neho klinkes, taktiez kazde vajce ma niaku hodnotu)
+	- za tieto peniaze si kupujes nove husy
+	-
 */
 
 /*
