@@ -7,6 +7,7 @@ public class Goose : MonoBehaviour
 {
 	[Header("Main")]
 	[SerializeField] Rigidbody2D rb;
+	[SerializeField] public Animator myAnimator;
 	[SerializeField] int gooseType = 1;	// ZATIAL NA TOM NEBUDEM PRACOVAT,
 						// ALE TYPES SU:
 						// 0 = secret (rainbow :O)
@@ -90,7 +91,7 @@ public class Goose : MonoBehaviour
 		Debug.Log("finished eating");
 
 		yield break;	// finally found out how to do it
-				// idk why, but my intellisense doesnt work. Unity sucks imo
+				// idk why, but my intellisense doesnt work. Unity sucks imo, let's switch to UE
 	}
 
 	IEnumerator MainCorot()
