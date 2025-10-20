@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Grass : MonoBehaviour
+public class EatenGrass : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+	[Header("Regrow Settings")]
+	[SerializeField] float regrowTimeMin = 5f;
+	[SerializeField] float regrowTimeMax = 10f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	void Start()
+	{
+		float regrowTime = Random.Range(regrowTimeMin, regrowTimeMax);
+		Destroy(gameObject, regrowTime);
+	}
 }

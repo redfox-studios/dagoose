@@ -1,16 +1,64 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+	public static UIManager Instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[Header("UI References")]
+	[SerializeField] TextMeshProUGUI moneyText;
+	[SerializeField] Button buyGooseButton;
+	[SerializeField] TextMeshProUGUI buttonText;
+
+	void Awake()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	void Start()
+	{
+		if (buyGooseButton != null)
+		{
+			buyGooseButton.onClick.AddListener(OnBuyGooseClicked);
+		}
+
+		if (buttonText != null && GameManager.Instance != null)
+		{
+			buttonText.text = "Buy Goose ($" + GameManager.Instance.GooseCost + ")";
+		}
+	}
+
+	public void UpdateMoneyDisplay(int amount)
+	{
+		if (moneyText != null)
+		{
+			moneyText.text = "$" + amount.ToString();
+		}
+
+		UpdateButtonState();
+	}
+
+	void UpdateButtonState()
+	{
+		if (buyGooseButton != null && GameManager.Instance != null)
+		{
+			buyGooseButton.interactable = GameManager.Instance.CanAffordGoose();
+		}
+	}
+
+	void OnBuyGooseClicked()
+	{
+		if (GameManager.Instance != null)
+		{
+			GameManager.Instance.BuyGoose();
+		}
+	}
 }

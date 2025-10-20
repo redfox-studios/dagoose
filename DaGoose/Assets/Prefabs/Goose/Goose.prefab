@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1424293064385380408}
   - component: {fileID: 6060214834508838205}
   - component: {fileID: 7256521820638317381}
+  - component: {fileID: 1132090730462485295}
   m_Layer: 0
   m_Name: Goose
   m_TagString: Untagged
@@ -178,16 +179,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4393181438352490056}
-  myAnimator: {fileID: 7256521820638317381}
+  Visuals: {fileID: 7256521820638317381}
   gooseType: 1
+  honkSound: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
+  audioSource: {fileID: 1132090730462485295}
   direction: {x: 0, y: 0}
   speed: 0.5
-  waitTimeMin: 1
-  waitTimeMax: 2
+  idleTimeMin: 1
+  idleTimeMax: 2
   moveTimeMin: 1
   moveTimeMax: 2
   eatTimeMin: 2
   eatTimeMax: 3
+  layChance: 0.3
+  eggPrefabs:
+  - {fileID: 1443928341714446664, guid: 969d60930366e1d41a37c83eba75bb4d, type: 3}
+  - {fileID: 1443928341714446664, guid: 10287e228b70f884c8bd4021dcacbb30, type: 3}
+  - {fileID: 1443928341714446664, guid: a31c6773cf295234c81258dd43a73ed7, type: 3}
+  - {fileID: 1443928341714446664, guid: a3f5a12f0ab4e414a9402cdc24b1c9d1, type: 3}
+  - {fileID: 1443928341714446664, guid: ac5f8718dc2570b468b89d35eb06f5f4, type: 3}
+  eatenGrassPrefab: {fileID: 7689764549310037409, guid: c397e171ba8f956419c582388ee7a130, type: 3}
 --- !u!114 &6060214834508838205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +238,100 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &1132090730462485295
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178058230351813942}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

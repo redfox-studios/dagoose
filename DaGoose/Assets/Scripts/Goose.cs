@@ -1,127 +1,51 @@
 using UnityEngine;
 using System.Collections;
-// using System.Numerics; - FUCK YOU, WHY DID YOU EVEN PUT YOURSELF AUTOMATICALLY HERE
-using System.Globalization;
 
 public class Goose : MonoBehaviour
 {
 	[Header("Main")]
 	[SerializeField] Rigidbody2D rb;
-	[SerializeField] public Animator Visuals;       // Usage example: Visuals.SetBool("eat", false); - Currently have: eat, walk, idle
-	[SerializeField] int gooseType = 1;     // ZATIAL NA TOM NEBUDEM PRACOVAT,
-						// ALE TYPES SU:
-						// 0 = secret (rainbow :O)
-						// 1 = normal
-						// 2 = evil
+	[SerializeField] public Animator Visuals;
+	[SerializeField] int gooseType = 1;
 
-	[Header("Movement parameters")] // movement (obviously)
+	[Header("Audio")]
+	[SerializeField] AudioClip honkSound;
+	[SerializeField] AudioSource audioSource;
+
+	[Header("Movement Parameters")]
 	[SerializeField] private Vector2 direction;
 	[SerializeField] float speed = 0.5f;
 
-	[Header("Wait time Parameters")] // wait time is the time before moving the goose after starting the coroutine (MainCorot)
-	[SerializeField] float waitTimeMin = 1;
-	[SerializeField] float waitTimeMax = 2;
+	[Header("Idle Time Parameters")]
+	[SerializeField] float idleTimeMin = 1f;
+	[SerializeField] float idleTimeMax = 2f;
 
-	[Header("Move time Parameters")] // move time, okay, maybe it was actually useful for something (originally restTime)
-	[SerializeField] float moveTimeMin = 1;
-	[SerializeField] float moveTimeMax = 2;
+	[Header("Move Time Parameters")]
+	[SerializeField] float moveTimeMin = 1f;
+	[SerializeField] float moveTimeMax = 2f;
 
-	[Header("Eating Parameters")] // eat time
-	[SerializeField] float eatTimeMin = 2;
-	[SerializeField] float eatTimeMax = 3;
+	[Header("Eating Parameters")]
+	[SerializeField] float eatTimeMin = 2f;
+	[SerializeField] float eatTimeMax = 3f;
 
-	float returnRandomWaitTime()
-	{
-		float randomWaitTime = Random.Range(waitTimeMin, waitTimeMax);
-		randomWaitTime = Mathf.Round(randomWaitTime * 100) / 100; // round to 2 decimal numbers
+	[Header("Laying Parameters")]
+	[SerializeField] float layChance = 0.3f;	// 30% chance to lay egg after idle
+	[SerializeField] GameObject[] eggPrefabs; 	// Assign 5 egg prefabs (Default, Gold, Diamond, Ruby, Rainbow)
 
-		return randomWaitTime;
-	}
+	[Header("Eaten Grass")]
+	[SerializeField] GameObject eatenGrassPrefab;
 
-	float returnRandomMoveTime()
-	{
-		float randomMoveTime = Random.Range(moveTimeMin, moveTimeMax);
-		randomMoveTime = Mathf.Round(randomMoveTime * 100) / 100; // round to 2 decimal numbers
-
-		return randomMoveTime;
-	}
-
-	float returnRandomEatTime()
-	{
-		float randomEatTime = Random.Range(eatTimeMin, eatTimeMax);
-		randomEatTime = Mathf.Round(randomEatTime * 100) / 100; // round to 2 decimal numbers
-
-		return randomEatTime;
-	}
-
-	Vector2 returnRandomVector()
-	{
-		float randomX = Random.Range(-1f, 1f);
-		randomX = Mathf.Round(randomX * 100) / 100; // round to 2 decimal numbers
-
-		float randomY = Random.Range(-1f, 1f);
-		randomY = Mathf.Round(randomY * 100) / 100; // round to 2 decimal numbers
-
-		direction.x = randomX;
-		direction.y = randomY;
-
-		Vector2 normalizedDirection = direction.normalized;
-
-		return normalizedDirection;
-	}
-
-	Vector2 startWalking()
-	{
-		Vector2 normalizedDirection = returnRandomVector();
-		return rb.linearVelocity = normalizedDirection * speed;
-	}
-
-	Vector2 stopWalking()
-	{
-		return rb.linearVelocity = new Vector2(0, 0);
-	}
-
-	IEnumerator EatingCorot()
-	{
-		float randomEatTime = returnRandomEatTime();
-
-		stopWalking();
-		Debug.Log("Eating for " + randomEatTime + " seconds.");
-		yield return new WaitForSeconds(randomEatTime);
-		Debug.Log("finished eating");
-
-		yield break;    // finally found out how to do it
-				// idk why, but my intellisense doesnt work. Unity sucks imo, let's switch to UE
-	}
-
-	IEnumerator MainCorot()
-	{
-		while (true)
-		{
-			// variables
-			float randomWaitTime = returnRandomWaitTime();
-			float randomMoveTime = returnRandomMoveTime();
-
-			// wait
-			Debug.Log("Waiting for " + randomWaitTime + " seconds.");
-			yield return new WaitForSeconds(randomWaitTime);
-
-			// move
-			startWalking();
-			Debug.Log("Moving for " + randomMoveTime + " seconds.");
-			yield return new WaitForSeconds(randomMoveTime);
-
-			// stop walking
-			stopWalking();
-
-			// eat
-			yield return EatingCorot();
-		}
-	}
+	private bool isOnEatenGrass = false;
+	private int eatenGrassLayerMask;
 
 	void Start()
 	{
 		StartCoroutine(MainCorot());
+
+		if (audioSource == null)
+			audioSource = GetComponent<AudioSource>();
+
+		eatenGrassLayerMask = LayerMask.GetMask("EatenGrass");
 
 		switch (gooseType)
 		{
@@ -134,6 +58,148 @@ public class Goose : MonoBehaviour
 			default:
 				Debug.Log("Error: Invalid goose type.");
 				break;
+		}
+	}
+
+	void OnMouseDown()
+	{
+		if (honkSound != null && audioSource != null)
+		{
+			audioSource.PlayOneShot(honkSound);
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("EatenGrass"))
+		{
+			isOnEatenGrass = true;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("EatenGrass"))
+		{
+			isOnEatenGrass = false;
+		}
+	}
+
+	float GetRandomTime(float min, float max)
+	{
+		return Mathf.Round(Random.Range(min, max) * 100f) / 100f;
+	}
+
+	Vector2 GetRandomDirection()
+	{
+		float randomX = Mathf.Round(Random.Range(-1f, 1f) * 100f) / 100f;
+		float randomY = Mathf.Round(Random.Range(-1f, 1f) * 100f) / 100f;
+
+		direction.x = randomX;
+		direction.y = randomY;
+
+		return direction.normalized;
+	}
+
+	void StartWalking()
+	{
+		Vector2 normalizedDirection = GetRandomDirection();
+		rb.linearVelocity = normalizedDirection * speed;
+		Visuals.SetBool("action-walk", true);
+		Visuals.SetBool("action-idle", false);
+	}
+
+	void StopWalking()
+	{
+		rb.linearVelocity = Vector2.zero;
+		Visuals.SetBool("action-walk", false);
+		Visuals.SetBool("action-idle", true);
+	}
+
+	IEnumerator IdleCorot()
+	{
+		float idleTime = GetRandomTime(idleTimeMin, idleTimeMax);
+
+		StopWalking();
+		Debug.Log("Idling for " + idleTime + " seconds.");
+		yield return new WaitForSeconds(idleTime);
+		Debug.Log("Finished idling");
+	}
+
+	IEnumerator EatingCorot()
+	{
+		if (isOnEatenGrass)
+		{
+			Debug.Log("Can't eat - standing on eaten grass!");
+			yield break;
+		}
+
+		float eatTime = GetRandomTime(eatTimeMin, eatTimeMax);
+
+		StopWalking();
+		Visuals.SetBool("action-eat", true);
+		Debug.Log("Eating for " + eatTime + " seconds.");
+		yield return new WaitForSeconds(eatTime);
+		Visuals.SetBool("action-eat", false);
+		Debug.Log("Finished eating");
+
+		// Spawn eaten grass
+		if (eatenGrassPrefab != null)
+		{
+			GameObject grass = Instantiate(eatenGrassPrefab, transform.position, Quaternion.identity);
+			Transform collection = GameObject.Find("EatenGrassCollection")?.transform;
+
+			if (collection != null)
+			{
+				grass.transform.SetParent(collection);
+			}
+		}
+	}
+
+	IEnumerator LayEggCorot()
+	{
+		Debug.Log("Laying an egg...");
+
+		// Determine egg type based on chances
+		float roll = Random.Range(0f, 100f);
+		int eggIndex = 0; // Default
+
+		if (roll < 1f) eggIndex = 4; // Rainbow 1%
+		else if (roll < 5f) eggIndex = 3; // Ruby 4%
+		else if (roll < 15f) eggIndex = 2; // Diamond 10%
+		else if (roll < 40f) eggIndex = 1; // Gold 25%
+		else eggIndex = 0; // Default 60%
+
+		if (eggPrefabs != null && eggIndex < eggPrefabs.Length && eggPrefabs[eggIndex] != null)
+		{
+			GameObject egg = Instantiate(eggPrefabs[eggIndex], transform.position, Quaternion.identity);
+			Debug.Log("Laid egg type: " + eggIndex);
+		}
+
+		yield return new WaitForSeconds(1f);
+	}
+
+	IEnumerator MainCorot()
+	{
+		while (true)
+		{
+			// Idle
+			yield return IdleCorot();
+
+			// Random chance to lay egg after idle
+			if (Random.value < layChance)
+			{
+				yield return LayEggCorot();
+			}
+
+			// Walk
+			float moveTime = GetRandomTime(moveTimeMin, moveTimeMax);
+			StartWalking();
+			Debug.Log("Moving for " + moveTime + " seconds.");
+			yield return new WaitForSeconds(moveTime);
+
+			// Eat
+			yield return EatingCorot();
 		}
 	}
 }
