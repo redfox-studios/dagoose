@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4393181438352490056}
+  myAnimator: {fileID: 7256521820638317381}
   gooseType: 1
   direction: {x: 0, y: 0}
   speed: 0.5

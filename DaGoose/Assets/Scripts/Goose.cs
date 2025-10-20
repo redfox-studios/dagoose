@@ -7,7 +7,7 @@ public class Goose : MonoBehaviour
 {
 	[Header("Main")]
 	[SerializeField] Rigidbody2D rb;
-	[SerializeField] public Animator myAnimator;
+	[SerializeField] public Animator Visuals; 	// Usage example: Visuals.SetBool("eat", false); - Currently have: eat, walk, idle
 	[SerializeField] int gooseType = 1;	// ZATIAL NA TOM NEBUDEM PRACOVAT,
 						// ALE TYPES SU:
 						// 0 = secret (rainbow :O)
