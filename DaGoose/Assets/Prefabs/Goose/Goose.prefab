@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6060214834508838205}
   - component: {fileID: 7256521820638317381}
   - component: {fileID: 1132090730462485295}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178058230351813942}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -6969716538603885750, guid: ff65bdf3c19703c439693233979579a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -115,11 +115,11 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5293444827509501584
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -184,14 +184,14 @@ MonoBehaviour:
   honkSound: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
   audioSource: {fileID: 1132090730462485295}
   direction: {x: 0, y: 0}
-  speed: 1
+  speed: 2
   idleTimeMin: 1
   idleTimeMax: 2
   moveTimeMin: 1
-  moveTimeMax: 2
+  moveTimeMax: 2.5
   eatTimeMin: 2
   eatTimeMax: 3
-  layChance: 0.3
+  layChance: 0.25
   eggPrefabs:
   - {fileID: 1443928341714446664, guid: 969d60930366e1d41a37c83eba75bb4d, type: 3}
   - {fileID: 1443928341714446664, guid: 10287e228b70f884c8bd4021dcacbb30, type: 3}
@@ -250,7 +250,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
