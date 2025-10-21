@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7049938418367576386}
   - component: {fileID: 4393181438352490056}
   - component: {fileID: 5293444827509501584}
-  - component: {fileID: 1424293064385380408}
-  - component: {fileID: 6060214834508838205}
   - component: {fileID: 7256521820638317381}
   - component: {fileID: 1132090730462485295}
+  - component: {fileID: 1424293064385380408}
+  - component: {fileID: 6060214834508838205}
   m_Layer: 6
   m_Name: Goose
   m_TagString: Untagged
@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -6969716538603885750, guid: ff65bdf3c19703c439693233979579a6, type: 3}
+  m_Sprite: {fileID: -4134244555268751719, guid: fa9eba492cc9eb344ae09fa1fdb86b23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.625, y: 0.78125}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -158,64 +158,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.625, y: 0.78125}
-    newSize: {x: 0.625, y: 0.78125}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 0.625, y: 0.78125}
   m_EdgeRadius: 0
---- !u!114 &1424293064385380408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178058230351813942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c84dced44412343afeec0a12545e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4393181438352490056}
-  Visuals: {fileID: 7256521820638317381}
-  gooseType: 1
-  honkSound: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
-  audioSource: {fileID: 1132090730462485295}
-  direction: {x: 0, y: 0}
-  speed: 2
-  idleTimeMin: 1
-  idleTimeMax: 2
-  moveTimeMin: 1
-  moveTimeMax: 2.5
-  eatTimeMin: 2
-  eatTimeMax: 3
-  layChance: 0.25
-  eggPrefabs:
-  - {fileID: 1443928341714446664, guid: 969d60930366e1d41a37c83eba75bb4d, type: 3}
-  - {fileID: 1443928341714446664, guid: 10287e228b70f884c8bd4021dcacbb30, type: 3}
-  - {fileID: 1443928341714446664, guid: a31c6773cf295234c81258dd43a73ed7, type: 3}
-  - {fileID: 1443928341714446664, guid: a3f5a12f0ab4e414a9402cdc24b1c9d1, type: 3}
-  - {fileID: 1443928341714446664, guid: ac5f8718dc2570b468b89d35eb06f5f4, type: 3}
-  eatenGrassPrefab: {fileID: 7689764549310037409, guid: c397e171ba8f956419c582388ee7a130, type: 3}
---- !u!114 &6060214834508838205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178058230351813942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b5436c70a4f104d99ca8afb6ec50ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  useFlipX: 1
-  invertFlip: 0
-  flipThreshold: 0.01
-  rb: {fileID: 4393181438352490056}
 --- !u!95 &7256521820638317381
 Animator:
   serializedVersion: 7
@@ -226,7 +176,7 @@ Animator:
   m_GameObject: {fileID: 1178058230351813942}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: efcafe82db5376f49b368bd8f0d85a2b, type: 2}
+  m_Controller: {fileID: 9100000, guid: d22de7496ec9444488f6276d4439ff39, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -249,7 +199,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 56f806d0e5851c9488a245f426acf006, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -335,3 +285,53 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1424293064385380408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178058230351813942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59090e71642cc2c48b54fa54a54960fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4393181438352490056}
+  Visuals: {fileID: 7256521820638317381}
+  gooseType: 1
+  honkSound: {fileID: 8300000, guid: 56f806d0e5851c9488a245f426acf006, type: 3}
+  audioSource: {fileID: 1132090730462485295}
+  direction: {x: 0, y: 0}
+  speed: 2
+  idleTimeMin: 1
+  idleTimeMax: 3
+  moveTimeMin: 1
+  moveTimeMax: 2
+  eatTimeMin: 2
+  eatTimeMax: 3
+  layChance: 0.25
+  eggPrefabs:
+  - {fileID: 1443928341714446664, guid: 1eb235478bb90c34b972db1755045c6c, type: 3}
+  - {fileID: 1443928341714446664, guid: fff15ca34ca75ee4bb2682912d9b4d58, type: 3}
+  - {fileID: 1443928341714446664, guid: 2c248068a1941b5449fdbc604b8b7aea, type: 3}
+  - {fileID: 1443928341714446664, guid: 33355794ceaff324f8295c55ceb85975, type: 3}
+  - {fileID: 1443928341714446664, guid: 0b64df9b1cac70d48821b4fa03a5acef, type: 3}
+  eatenGrassPrefab: {fileID: 7689764549310037409, guid: 02f017f43ed4ad34493836def6eee368, type: 3}
+--- !u!114 &6060214834508838205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178058230351813942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e14d7427caa4d8458bb24b6cf73ff7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7049938418367576386}
+  useFlipX: 1
+  invertFlip: 0
+  flipThreshold: 0.01
+  rb: {fileID: 0}
