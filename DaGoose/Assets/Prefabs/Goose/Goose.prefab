@@ -184,7 +184,7 @@ MonoBehaviour:
   honkSound: {fileID: 8300000, guid: 5d60faa9d90268f4db2469daff86024c, type: 3}
   audioSource: {fileID: 1132090730462485295}
   direction: {x: 0, y: 0}
-  speed: 0.5
+  speed: 1
   idleTimeMin: 1
   idleTimeMax: 2
   moveTimeMin: 1

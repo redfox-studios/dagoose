@@ -18,7 +18,17 @@ public class Egg : MonoBehaviour
 
 	void OnMouseDown()
 	{
+		Debug.Log("Egg clicked!");
 		CollectEgg();
+	}
+
+	void OnMouseOver()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			Debug.Log("Egg mouse over + click!");
+			CollectEgg();
+		}
 	}
 
 	void CollectEgg()
@@ -29,8 +39,11 @@ public class Egg : MonoBehaviour
 		{
 			GameManager.Instance.AddMoney(value);
 			Debug.Log("Collected " + eggType + " egg for $" + value);
+			Destroy(gameObject);
 		}
-
-		Destroy(gameObject);
+		else
+		{
+			Debug.LogError("GameManager.Instance is null!");
+		}
 	}
 }

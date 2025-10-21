@@ -37,6 +37,9 @@ public class Goose : MonoBehaviour
 
 	private bool isOnEatenGrass = false;
 	private int eatenGrassLayerMask;
+	private bool isDragging = false;
+	private Vector3 offset;
+	private Camera mainCamera;
 
 	void Start()
 	{
@@ -45,6 +48,7 @@ public class Goose : MonoBehaviour
 		if (audioSource == null)
 			audioSource = GetComponent<AudioSource>();
 
+		mainCamera = Camera.main;
 		eatenGrassLayerMask = LayerMask.GetMask("EatenGrass");
 
 		switch (gooseType)
@@ -67,6 +71,24 @@ public class Goose : MonoBehaviour
 		{
 			audioSource.PlayOneShot(honkSound);
 		}
+
+		isDragging = true;
+		Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+		offset = transform.position - new Vector3(mousePos.x, mousePos.y, transform.position.z);
+	}
+
+	void OnMouseDrag()
+	{
+		if (isDragging)
+		{
+			Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+			transform.position = new Vector3(mousePos.x + offset.x, mousePos.y + offset.y, transform.position.z);
+		}
+	}
+
+	void OnMouseUp()
+	{
+		isDragging = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
