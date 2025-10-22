@@ -5,7 +5,7 @@ public class Goose : MonoBehaviour
 {
 	[Header("Main")]
 	[SerializeField] Rigidbody2D rb;
-	[SerializeField] public Animator Visuals;
+	[SerializeField] public Animator visuals;
 	[SerializeField] int gooseType = 1;
 
 	[Header("Audio")]
@@ -127,15 +127,15 @@ public class Goose : MonoBehaviour
 	{
 		Vector2 normalizedDirection = GetRandomDirection();
 		rb.linearVelocity = normalizedDirection * speed;
-		Visuals.SetBool("action-walk", true);
-		Visuals.SetBool("action-idle", false);
+		visuals.SetBool("action-walk", true);
+		visuals.SetBool("action-idle", false);
 	}
 
 	void StopWalking()
 	{
 		rb.linearVelocity = Vector2.zero;
-		Visuals.SetBool("action-walk", false);
-		Visuals.SetBool("action-idle", true);
+		visuals.SetBool("action-walk", false);
+		visuals.SetBool("action-idle", true);
 	}
 
 	IEnumerator IdleCorot()
@@ -159,10 +159,10 @@ public class Goose : MonoBehaviour
 		float eatTime = GetRandomTime(eatTimeMin, eatTimeMax);
 
 		StopWalking();
-		Visuals.SetBool("action-eat", true);
+		visuals.SetBool("action-eat", true);
 		Debug.Log("Eating for " + eatTime + " seconds.");
 		yield return new WaitForSeconds(eatTime);
-		Visuals.SetBool("action-eat", false);
+		visuals.SetBool("action-eat", false);
 		Debug.Log("Finished eating");
 
 		// Spawn eaten grass

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -4134244555268751719, guid: af90e6862367f224bae596463dbc589e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2619193168779503479}
-  Visuals: {fileID: 4011531498323551055}
+  visuals: {fileID: 4011531498323551055}
   gooseType: 1
   honkSound: {fileID: 8300000, guid: ba7dfdf6b70ac9c42a14c368c826e835, type: 3}
   audioSource: {fileID: 4498148000040532639}
