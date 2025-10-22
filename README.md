@@ -1,127 +1,260 @@
-# DaGoose - Ako hra funguje
+# DaGoose - Game Design Document
 
-## Zakladny gameplay loop
+## Core Gameplay Loop
 
-1. **Husy sa pohybuju sami:**
-   - Idle (nic nerobia) -> nahodna sanca zniest vajce -> chodia -> jedia travu -> repeat
-   
-2. **Zber vajec:**
-   - Kliknes na vajce = dostanes peniaze (2-50$ podla typu)
-   - Typy: Default, Gold, Diamond, Ruby, Rainbow (gambling)
+**Basic flow:**
+Idle → (30% chance lay egg) → Walk → Eat → repeat
 
-3. **Kupovanie husi:**
-   - Za 20$ kupis novu hus = viac vajec = viac penazi
-
-4. **Interakcia:**
-   - Kliknutie na hus = honk sound
-   - Podržat klik = drag and drop husi
-
-## Skripty vysvetlene
-
-**Goose.cs** - AI husi (pohyb, jedenie, vajcia)  
-**Egg.cs** - klikanie na vajcia, hodnoty  
-**EatenGrass.cs** - trava dorasta spat po case  
-**GameManager.cs** - peniaze, kupovanie husi  
-**UIManager.cs** - zobrazenie penazi, button na shop
+**Player actions:**
+- Click eggs to collect money
+- Click geese to hear honk sound
+- Buy new geese with money
+- Switch between worlds
+- Buy upgrades (local per world)
+- Buy global upgrades (apply to all worlds)
 
 ---
 
-# Napady na vylepsenie
+## World System
 
-## 1. Upgrade system (MUST-HAVE)
+### 5 Worlds with separate currencies
 
-### B) Magnet Upgrade
-- Vajcia pomaly letia k tebe (ku kurzoru) -> magnet si mozes togglovat
-- **Level 1:** OFF
-- **Level 2:** Small magnet (cost: 100$)
-- **Level 3:** Medium speed (cost: 300$)
-- **Level 4:** Strong magnet (cost: 800$)
+**Plains World** (Green theme)
+- Currency: Plains Gold
+- Default unlocked
+- Base earnings: 1x
 
-### C) Auto sell eggs
-- **Level 1:** default egg (cost: 1500$)
-- **Level 2:** gold egg (cost: 2000$)
-- **Level 3:** diamond egg (cost: 3000$)
-- **Level 4:** ruby egg (cost: 4500$)
-- **Level 5:** rainbow egg (cost: 6000$)
+**Desert World** (Yellow/Orange theme)
+- Currency: Desert Gems
+- Unlock: Earn 5,000 Plains Gold total
+- Base earnings: 2x
 
-- Auto sell/collect bude mat niaky tax (napriklad 30%)
-- Taktiez je drahy preto aby sa gameplay neminimalizoval hned na zaciatku.
+**Snow World** (Blue/White theme)
+- Currency: Snow Crystals
+- Unlock: Earn 50,000 Desert Gems total
+- Base earnings: 5x
 
-### D) Egg Spawn Rate
-- Zvysit sancu na spawn vajca
-- **Level 1:** 30% chance
-- **Level 2:** 40% (100$)
-- **Level 3:** 50% (300$)
-- **Level 4:** 65% (700$)
-- **Level 5:** 80% (1500$)
+**Lava World** (Red/Black theme)
+- Currency: Lava Coins
+- Unlock: Earn 500,000 Snow Crystals total
+- Base earnings: 10x
 
-## 2. World/Prestige system (VElKy GAME CHANGER)
+**Rainbow World** (Rainbow theme)
+- Currency: Rainbow Shards
+- Unlock: Earn 5,000,000 Lava Coins total + 50 global tokens
+- Base earnings: 25x
+- Special: Only 1 egg type, gives mixed tokens
 
-**Ako funguje:**
-- Mas viac svetov (World 1, 2, 3, 4...)
-- Kazdy svet je v inej scene (tu momentalne rozmyslam ci kazdy svet by mal inu currency alebo ine veci... Taktiez rozmyslam ci kazdy svet bude mat vlastny egg type, tympadom by bol este 5 svet - rainbow world)
-- Každy svet ma vyssi earning multiplier ALE aj vyssiu cenu husi
+---
 
-**Priklad:**
-```
-World 1: Goose 20$, 2x multiplier
-World 2: Goose 100$, 5x multiplier
-World 3: Goose 500$, 25x multiplier
-World 4: Goose 2500$, 125x multiplier
-```
-- na toto bude asi treba fixnut to ze hus mozes draggovat IBA v jej svete, a nie do inych svetov. Po pripade dragging zrusit
+## Egg System
 
-**Prestige mechanika:**
-- Keď mas dost penazi, môžes "prestigenut" do vyssieho sveta
-- Stratis vsetko (peniaze, husy) ALE:
-  - Keepnes upgrady
-  - Zarabas ovela viac
-  - Novy visual (ina farba husi, pozadie, trava)
+### Rarity & Values per World
 
-**Special/Rare egg v každom svete:**
-- 1% sanca na Golden Special Egg
-- Da ti 10x viac ako Rainbow v tom svete
-- Ma iny visual (blystiaci sa, animovany)
+**Plains World:**
+- Common (60%): Plain Egg - 2 Gold
+- Uncommon (25%): Spotted Egg - 5 Gold
+- Rare (10%): Green Gem Egg - 10 Gold
+- Epic (4%): Emerald Egg - 20 Gold
+- Legendary (1%): Golden Acorn Egg - 50 Gold + 1 Acorn Token
 
-## 3. Pasivne zarabanie (Idle game mechanika)
+**Desert World:**
+- Common (60%): Sand Egg - 4 Gems
+- Uncommon (25%): Cactus Egg - 10 Gems
+- Rare (10%): Amber Egg - 20 Gems
+- Epic (4%): Topaz Egg - 40 Gems
+- Legendary (1%): Golden Scarab Egg - 100 Gems + 1 Scarab Token
 
-### Auto-collect upgrade
-- Vajcia sa zbieraju automaticky po X sekundach
-- **Level 1:** OFF
-- **Level 2:** Auto-collect po 10s (200$)
-- **Level 3:** Auto-collect po 5s (600$)
-- **Level 4:** Auto-collect po 2s (1500$)
-- **Level 5:** Instant auto-collect (5000$)
+**Snow World:**
+- Common (60%): Frost Egg - 8 Crystals
+- Uncommon (25%): Icicle Egg - 20 Crystals
+- Rare (10%): Sapphire Egg - 40 Crystals
+- Epic (4%): Diamond Egg - 80 Crystals
+- Legendary (1%): Golden Snowflake Egg - 200 Crystals + 1 Snowflake Token
 
-### Offline earnings
-- Keď nie si v hre, stale zarabas (menej ako online)
-- Pri vrateni ti ukaže popup "You earned $XXX while away!"
+**Lava World:**
+- Common (60%): Obsidian Egg - 16 Coins
+- Uncommon (25%): Magma Egg - 40 Coins
+- Rare (10%): Ruby Egg - 80 Coins
+- Epic (4%): Phoenix Egg - 160 Coins
+- Legendary (1%): Golden Flame Egg - 400 Coins + 1 Flame Token
 
-## 4. Achievements system -> ak to dam na steam
+**Rainbow World:**
+- Rainbow Egg (100%): 100 Shards + 5 random tokens
 
-Priklady:
-- "First Egg" - zober prve vajce
-- "Rich Goose" - ziskaj 1000$
-- "Goose Army" - vlastni 10 husi naraz
-- "Rainbow Collector" - zober 10 Rainbow vajec
-- "World Traveler" - dosiahni World 3
-- "Speed Demon" - kup max speed upgrade
+---
 
-**Reward za achievements:**
-- Mala suma penazi (50-500$)
-- Unlock specialnych skinov husi
+## Token System (Global Currency)
 
-## 7. Misc
+**Token types:**
+- Acorn Token (from Plains)
+- Scarab Token (from Desert)
+- Snowflake Token (from Snow)
+- Flame Token (from Lava)
 
-- **Settings menu:** Volume, Graphics quality, Particle effects ON/OFF
-- **Stats screen:** Total eggs collected, Total money earned, Play time, atď
-- **Save/Load system:** Cloud save cez steam `>:)`
-- **Tutorial:** Kratky guide pre novych hracov
-- **Sound effects:** Viac zvukov (egg collect, purchase, upgrade)
-- **Music:** Chill background music (lofi vibes?) -> Nah kamo, bude tam doom music
-- **Particles:** Pri zbere vajca, pri kupe husi, atď
+**Used for:** Global upgrades that work in ALL worlds
 
-### Daily Quests
-- "Collect 50 eggs today" - reward: 100$
-- "Buy 5 geese" - reward: 200$
-- "Reach $5000" - reward: 500$
+**How to earn:** Only from Legendary eggs (1% chance) in each world
+
+---
+
+## Upgrade System
+
+### Local Upgrades (per world, bought with world currency)
+
+**Magnet Upgrade:**
+- Level 1: OFF
+- Level 2: Small magnet - 100 currency
+- Level 3: Medium magnet - 300 currency
+- Level 4: Strong magnet - 800 currency
+
+**Auto-Sell Eggs:**
+- Level 1: Common eggs - 5,000 currency (30% tax)
+- Level 2: Uncommon eggs - 15,000 currency (30% tax)
+- Level 3: Rare eggs - 40,000 currency (30% tax)
+- Level 4: Epic eggs - 100,000 currency (30% tax)
+- Level 5: Legendary eggs - 250,000 currency (30% tax)
+
+**Egg Spawn Rate:**
+- Level 1: 30% chance (default)
+- Level 2: 40% chance - 100 currency
+- Level 3: 50% chance - 300 currency
+- Level 4: 65% chance - 700 currency
+- Level 5: 80% chance - 1,500 currency
+
+**Goose Cost (per world):**
+- Plains: 20 Gold
+- Desert: 100 Gems
+- Snow: 500 Crystals
+- Lava: 2,500 Coins
+- Rainbow: 10,000 Shards
+
+### Global Upgrades (bought with tokens, apply everywhere)
+
+- +10% earnings in all worlds - 10 tokens (any type)
+- +5% egg spawn rate everywhere - 15 tokens
+- Unlock auto-collect in all worlds - 50 tokens
+- +20% movement speed everywhere - 30 tokens
+- Permanent 2x multiplier - 100 tokens (requires mix of all types)
+- Reduce auto-sell tax to 20% - 75 tokens
+- Reduce auto-sell tax to 10% - 150 tokens
+
+---
+
+## Technical Implementation
+
+### Scripts Overview
+
+**Goose.cs** - Goose AI (movement, eating, laying eggs)
+**Egg.cs** - Egg click detection, value, token drops
+**EatenGrass.cs** - Despawn after time
+**GameManager.cs** - Money, goose spawning, save/load
+**WorldManager.cs** - World switching, currency management
+**UpgradeManager.cs** - Local & global upgrades
+**UIManager.cs** - Display money, buttons, upgrade UI
+
+### Key Features to Implement
+
+**World System:**
+- Each world = separate scene OR one scene with asset swapping
+- Save/load currency for each world separately
+- Track total earnings per world for unlock conditions
+
+**Goose Behavior:**
+- Same animations for all worlds
+- Rainbow world goose uses HueCycler.cs script
+- Other worlds can use SpriteRenderer.color tint (optional)
+
+**Eating Mechanic:**
+- Generic "foraging" action
+- EatenGrass prefab changes color based on world
+- Goose cannot eat on EatenGrass (collision detection)
+
+**Token System:**
+- Track 4 token types separately
+- Legendary eggs drop 1 token + normal currency
+- Rainbow eggs drop 5 random tokens
+
+**Upgrade System:**
+- Local upgrades stored per world
+- Global upgrades stored once, apply to all worlds
+- Auto-sell has 30% tax by default (reducible via upgrades)
+
+---
+
+## Art Assets Required
+
+### Per World (5 worlds):
+- Tileset/background sprites
+- 5 egg sprites (Common, Uncommon, Rare, Epic, Legendary)
+- EatenGrass sprite (can be color-swapped)
+
+### Shared Assets:
+- 1 Goose sprite (used in all worlds)
+- UI elements (buttons, panels, icons)
+- Sound effects (honk, egg collect, purchase)
+
+### Simplification Option:
+- Create 5 base egg shapes
+- Recolor them for each world (saves time)
+- Total: 5 base sprites × 5 colors = 25 egg variants
+
+---
+
+## Additional Features (Optional)
+
+**Stats Screen:**
+- Total eggs collected
+- Total money earned
+- Play time
+- Total tokens collected
+
+**Settings Menu:**
+- Volume control
+- Graphics quality
+- Particle effects toggle
+
+**Daily Quests:**
+- "Collect 50 eggs in Desert" - reward: 100 Desert Gems
+- "Buy 5 geese" - reward: 200 currency
+- "Collect 10 Legendary eggs" - reward: 5 random tokens
+
+**Offline Earnings:**
+- Earn reduced currency while offline
+- Popup on return: "You earned $XXX while away!"
+
+**Save System:**
+- Auto-save every 30 seconds
+- Save currency per world
+- Save upgrade levels
+- Save token counts
+- Save world unlock status
+
+**Particles:**
+- Egg collection effect
+- Purchase confirmation effect
+- World switch transition
+
+---
+
+## Balancing Notes
+
+**Early game (Plains):**
+- Start with 0 Gold
+- First goose costs 20 Gold (need ~10 eggs)
+- First upgrade accessible after ~50 eggs
+
+**Mid game (Desert/Snow):**
+- Significantly higher earnings
+- Local upgrades more expensive
+- Global upgrades become accessible
+
+**Late game (Lava/Rainbow):**
+- Focus shifts to token farming
+- Global upgrades are primary goal
+- Rainbow world is victory lap
+
+**Economy:**
+- Each world roughly 2-5x more expensive than previous
+- Auto-sell tax prevents full automation early
+- Global upgrades require playing multiple worlds
