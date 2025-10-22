@@ -39,11 +39,12 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 - Unlock: Earn 500,000 Snow Crystals total
 - Base earnings: 10x
 
-**Rainbow World** (Rainbow theme)
-- Currency: Rainbow Shards
+**Void World** (Purple/Black theme)
+- Currency: Void Essence
 - Unlock: Earn 5,000,000 Lava Coins total + 50 global tokens
-- Base earnings: 25x
-- Special: Only 1 egg type, gives mixed tokens
+- Base earnings: 50x
+- Special: Only 1 egg type, gives 10 mixed tokens
+- Endgame world
 
 ---
 
@@ -79,8 +80,9 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 - Epic (4%): Phoenix Egg - 160 Coins
 - Legendary (1%): Golden Flame Egg - 400 Coins + 1 Flame Token
 
-**Rainbow World:**
-- Rainbow Egg (100%): 100 Shards + 5 random tokens
+**Void World:**
+- Void Egg (100%): 100 Essence + 10 random tokens (2 of each type)
+- Special (5%): Cosmic Egg - 1,000 Essence + 50 tokens
 
 ---
 
@@ -127,7 +129,7 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 - Desert: 100 Gems
 - Snow: 500 Crystals
 - Lava: 2,500 Coins
-- Rainbow: 10,000 Shards
+- Void: 10,000 Essence
 
 ### Global Upgrades (bought with tokens, apply everywhere)
 
@@ -162,7 +164,7 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 
 **Goose Behavior:**
 - Same animations for all worlds
-- Rainbow world goose uses HueCycler.cs script
+- Void world goose uses transparency/glitch shader (optional)
 - Other worlds can use SpriteRenderer.color tint (optional)
 
 **Eating Mechanic:**
@@ -173,7 +175,8 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 **Token System:**
 - Track 4 token types separately
 - Legendary eggs drop 1 token + normal currency
-- Rainbow eggs drop 5 random tokens
+- Void eggs drop 10 random tokens (2 of each)
+- Cosmic eggs (5% in Void) drop 50 tokens
 
 **Upgrade System:**
 - Local upgrades stored per world
@@ -186,7 +189,8 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 
 ### Per World (5 worlds):
 - Tileset/background sprites
-- 5 egg sprites (Common, Uncommon, Rare, Epic, Legendary)
+- 5 egg sprites for worlds 1-4 (Common, Uncommon, Rare, Epic, Legendary)
+- 2 egg sprites for Void world (Void Egg, Cosmic Egg)
 - EatenGrass sprite (can be color-swapped)
 
 ### Shared Assets:
@@ -234,6 +238,39 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 - Egg collection effect
 - Purchase confirmation effect
 - World switch transition
+- Void world ambient particles (stars/cosmic dust)
+
+---
+
+## Endgame
+
+**Trigger Condition:**
+- Reach 10,000,000 Void Essence
+- Collect 100 total tokens (all types combined)
+
+**Cutscene Sequence:**
+1. Screen fades to black
+2. Goose sprite floats upward slowly
+3. Particle effects (stars/void particles)
+4. Text appears:
+   ```
+   "The geese have transcended.
+   No longer bound by eggs or worlds.
+   They are... eternal."
+   ```
+5. Goose dissolves into stars
+6. Fade to white
+7. "Thank you for playing DaGoose!"
+8. Two buttons: [Play Again] [Quit]
+
+**Play Again:**
+- Full game reset
+- Return to Plains World with 0 currency, 0 geese, 0 tokens
+- All upgrades reset
+- Fresh start (no bonuses)
+
+**Quit:**
+- Close application
 
 ---
 
@@ -249,10 +286,11 @@ Idle → (30% chance lay egg) → Walk → Eat → repeat
 - Local upgrades more expensive
 - Global upgrades become accessible
 
-**Late game (Lava/Rainbow):**
+**Late game (Lava/Void):**
 - Focus shifts to token farming
 - Global upgrades are primary goal
-- Rainbow world is victory lap
+- Void world is final challenge
+- Reaching endgame cutscene is victory condition
 
 **Economy:**
 - Each world roughly 2-5x more expensive than previous
