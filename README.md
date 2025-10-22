@@ -37,21 +37,17 @@
 - **Level 3:** Medium speed (cost: 300$)
 - **Level 4:** Strong magnet (cost: 800$)
 
-### C) Goose Cost Reduction
-- **Level 1:** 20$ za hus
-- **Level 2:** 18$ (cost: 200$)
-- **Level 3:** 15$ (cost: 500$)
-- **Level 4:** 12$ (cost: 1000$)
-- **Level 5:** 10$ (cost: 2000$)
+### C) Auto sell eggs
+- **Level 1:** default egg (cost: 1500$)
+- **Level 2:** gold egg (cost: 2000$)
+- **Level 3:** diamond egg (cost: 3000$)
+- **Level 4:** ruby egg (cost: 4500$)
+- **Level 5:** rainbow egg (cost: 6000$)
 
-### D) Auto sell eggs
-- **Level 1:** default egg (cost: 100$)
-- **Level 2:** gold egg (cost: 200$)
-- **Level 3:** diamond egg (cost: 400$)
-- **Level 4:** ruby egg (cost: 600$)
-- **Level 5:** rainbow egg (cost: 800$)
+- Auto sell/collect bude mat niaky tax (napriklad 30%)
+- Taktiez je drahy preto aby sa gameplay neminimalizoval hned na zaciatku.
 
-### E) Egg Spawn Rate
+### D) Egg Spawn Rate
 - Zvysit sancu na spawn vajca
 - **Level 1:** 30% chance
 - **Level 2:** 40% (100$)
@@ -121,7 +117,7 @@ Priklady:
 - **Save/Load system:** Cloud save cez steam `>:)`
 - **Tutorial:** Kratky guide pre novych hracov
 - **Sound effects:** Viac zvukov (egg collect, purchase, upgrade)
-- **Music:** Chill background music (lofi vibes?)
+- **Music:** Chill background music (lofi vibes?) -> Nah kamo, bude tam doom music
 - **Particles:** Pri zbere vajca, pri kupe husi, atď
 
 ### Daily Quests
