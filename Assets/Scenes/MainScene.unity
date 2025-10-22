@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f747f6f86043146acde4f2170e58c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 100000
+  startingMoney: 35
   goosePrefab: {fileID: 7545874285355834250, guid: 6bb59779e2ba66540a9318b38bbaf1c3, type: 3}
   gooseCost: 20
   gooseSpawnArea: {fileID: 588173191}
