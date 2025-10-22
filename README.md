@@ -59,6 +59,7 @@
 
 **Ako funguje:**
 - Mas viac svetov (World 1, 2, 3, 4...)
+- Kazdy svet je v inej scene (tu momentalne rozmyslam ci kazdy svet by mal inu currency alebo ine veci... Taktiez rozmyslam ci kazdy svet bude mat vlastny egg type, tympadom by bol este 5 svet - rainbow world)
 - Každy svet ma vyssi earning multiplier ALE aj vyssiu cenu husi
 
 **Priklad:**
