@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80148844d9600e4da8e61dddd985bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRenderer: {fileID: 0}
+  targetRenderer: {fileID: 3767862424821965410}
   cycleSpeed: 1
   saturation: 1
   brightness: 1
