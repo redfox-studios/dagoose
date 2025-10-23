@@ -12,6 +12,10 @@ public class PlayRandomMusic : MonoBehaviour
 		PlayRandomClip();
 	}
 
+	private void Update() {
+		if (Time.frameCount % 100 == 0) PlayRandomClip();
+	}
+
 	void PlayRandomClip()
 	{
 		if (musicClips.Length == 0) return;
